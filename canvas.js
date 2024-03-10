@@ -39,15 +39,15 @@ isDrawing=true;
 
 function draw(e){
     if (!isDrawing) return
-    console.log("drwaing start");
+    
     context.beginPath();
     context.moveTo(x,y);
     context.lineTo(e.offsetX,e.offsetY);
     context.strokeStyle=color;
     context.lineWidth = lineWidth;
     context.stroke();
-    
 [x, y] = [e.offsetX  ||e.screenX , e.offsetY || e.screenY];
+    console.log(e.screenX ,"and offset",e.offsetX);
     }
 
 function endDraw(){
@@ -78,6 +78,6 @@ canvas.addEventListener('mouseup',endDraw);
 canvas.addEventListener('mouseout',endDraw);
 
 
-canvas.addEventListener('touchstart', startDraw);
-canvas.addEventListener('touchmove', draw);
-canvas.addEventListener('touchend', endDraw);
+canvas.addEventListener('touchstart', startDraw,{passive:true});
+canvas.addEventListener('touchmove', draw,{passive:false});
+canvas.addEventListener('touchend', endDraw,{passive:true});
