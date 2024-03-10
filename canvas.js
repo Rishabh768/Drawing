@@ -25,39 +25,59 @@ line.addEventListener('change',(e)=>{
 })
 
 canvas.height=800;
-canvas.width=1517;
+canvas.width=window.innerWidth;
 let isDrawing=false;
 let x,y;
 context.fillStyle="white";
 context.fillRect(0,0,canvas.width,canvas.height)
 
 function startDraw(e){
-isDrawing=true;
-
-[x, y] = [e.offsetX  ||e.screenX , e.offsetY || e.screenY];
+     if(e.type=="touchstart"){
+        console.log("touch start")
+      isDrawing=true;
+        const touchX=e.touches[0].clientX;
+        const touchY=e.touches[0].clientY;
+        [x, y] = [touchX , touchY];
+     }
+     if(e.type=="mousedown"){
+         isDrawing=true;
+         [x, y] = [e.offsetX , e.offsetY];
+     }
 }
 
 function draw(e){
     if (!isDrawing) return
-    
-    context.beginPath();
-    context.moveTo(x,y);
-    context.lineTo(e.offsetX,e.offsetY);
-    context.strokeStyle=color;
-    context.lineWidth = lineWidth;
-    context.stroke();
-[x, y] = [e.offsetX  ||e.screenX , e.offsetY || e.screenY];
-    console.log(e.screenX ,"and offset",e.offsetX);
+    if(e.type=='touchmove'){
+        console.log("draw start")
+        context.beginPath();
+        context.moveTo(x,y);
+        context.lineTo(e.touches[0].clientX,e.touches[0].clientY);
+        context.strokeStyle=color;
+        context.lineWidth = lineWidth;
+        context.stroke();
+        [x, y] = [e.touches[0].clientX , e.touches[0].clientY];
+    }
+    if(e.type=='mousemove'){
+        console.log("draw start")
+        context.beginPath();
+        context.moveTo(x,y);
+        context.lineTo(e.offsetX,e.offsetY);
+        context.strokeStyle=color;
+        context.lineWidth = lineWidth;
+        context.stroke();
+        [x, y] = [e.offsetX , e.offsetY];
+    }
+
     }
 
 function endDraw(){
 isDrawing=false
+console.log("touchend")
 }
 
 let prev=null;
 function getColors(e,col){
     color=e.target.id;
-    console.log(e.target)
     if(prev !== null){
      prev.style.border='';
      }
