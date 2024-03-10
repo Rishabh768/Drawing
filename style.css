@@ -1,0 +1,60 @@
+
+*{
+    margin: 0px;
+}
+.tools-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 10px;
+    background-color: antiquewhite;
+    height: 60px; 
+    margin: 0px auto;
+    box-shadow: 2px 2px 10px  gray;
+   
+}
+
+
+#reset{
+    border: 1px solid red;
+    outline: none;
+    padding: 2px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+#save{
+    outline: none;
+    border: 1px solid blue;
+    background-color: blue;
+ padding: 2px 14px;
+ color: white;
+ border-radius: 4px;
+ cursor: pointer;
+}
+
+.color-container{
+    display: flex;
+    width: 150px;
+    justify-content: space-between;
+    margin-right: 4rem;
+    margin-left: 1.5rem;
+
+}
+.color-container div{
+    width: 20px;
+    height: 20px;
+    border: 1px solid white;
+}
+#red{
+    background-color: red;
+}
+#green{
+    background-color: green;
+}
+#yellow{
+    background-color: yellow;
+}
+#blue{
+    background-color: blue;
+}
