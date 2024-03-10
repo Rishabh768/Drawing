@@ -13,12 +13,9 @@ const save=document.getElementById('save').addEventListener('click',
     
     const link = document.createElement('a');
     link.href = dataURL;
-    
-    // Set the download attribute to specify the file name
     link.download = 'canvas_image.png';
-    
-    // Programmatically click the anchor element to trigger the download
     link.click();
+
 });
 let color;
 let lineWidth;
@@ -36,7 +33,7 @@ context.fillRect(0,0,canvas.width,canvas.height)
 
 function startDraw(e){
 isDrawing=true;
-[x,y]=[e.offsetX,e.offsetY]
+[x,y]=[e.offsetX || e.touches[0].clientX,e.offsetY ||e.touches[0].clientX]
 }
 
 function draw(e){
@@ -48,7 +45,7 @@ function draw(e){
     context.strokeStyle=color;
     context.lineWidth = lineWidth;
     context.stroke();
-    [x, y] = [e.offsetX, e.offsetY];
+    [x, y] = [e.offsetX || e.touches[0].clientX , e.offsetY || e.touches[0].clientY];
     }
 
 function endDraw(){
@@ -77,3 +74,8 @@ canvas.addEventListener('mousedown',startDraw);
 canvas.addEventListener('mousemove',draw);
 canvas.addEventListener('mouseup',endDraw);
 canvas.addEventListener('mouseout',endDraw);
+
+
+canvas.addEventListener('touchstart', startDraw);
+canvas.addEventListener('touchmove', draw);
+canvas.addEventListener('touchend', endDraw);
