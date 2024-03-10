@@ -33,7 +33,8 @@ context.fillRect(0,0,canvas.width,canvas.height)
 
 function startDraw(e){
 isDrawing=true;
-[x,y]=[e.offsetX || e.touches[0].clientX,e.offsetY ||e.touches[0].clientX]
+
+[x, y] = [e.offsetX  ||e.screenX , e.offsetY || e.screenY];
 }
 
 function draw(e){
@@ -45,7 +46,8 @@ function draw(e){
     context.strokeStyle=color;
     context.lineWidth = lineWidth;
     context.stroke();
-    [x, y] = [e.offsetX || e.touches[0].clientX , e.offsetY || e.touches[0].clientY];
+    
+[x, y] = [e.offsetX  ||e.screenX , e.offsetY || e.screenY];
     }
 
 function endDraw(){
